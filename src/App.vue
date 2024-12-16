@@ -1,5 +1,6 @@
 <script setup>
 import { useUserStore } from "./stores/UserStore";
+import AddUserModal from "./components/AddUserModal.vue";
 
 const userStore = useUserStore();
 
@@ -18,4 +19,5 @@ userStore.fetchUsers();
   <div>
     <div>Edit Pane</div>
   </div>
+  <AddUserModal></AddUserModal>
 </template>
