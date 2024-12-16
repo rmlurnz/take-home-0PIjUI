@@ -1,13 +1,21 @@
 <script setup>
+import { useUserStore } from "./stores/UserStore";
 
+const userStore = useUserStore();
+
+// retrieve users via API
+userStore.fetchUsers();
 </script>
 
 <template>
-  <main>
-    ...entrypoint
-  </main>
+  <div class="user-list">
+    <ul>
+      <li v-for="user in userStore.$state.users" :key="user.id">
+        {{ user.first_name + " " + Array.from(user.last_name)[0] }}
+      </li>
+    </ul>
+  </div>
+  <div>
+    <div>Edit Pane</div>
+  </div>
 </template>
-
-<style scoped>
-
-</style>
