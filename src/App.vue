@@ -19,13 +19,19 @@ const closeUserCreateModal = () => {
 </script>
 
 <template>
-  <div class="user-list">
-    <ul>
+  <div class="user-list-container">
+    <div class="filter"><i class="pi pi-filter"></i> Filter Users</div>
+    <ul class="user-list">
       <li v-for="user in userStore.$state.users" :key="user.id">
         {{ user.first_name + " " + Array.from(user.last_name)[0] }}
       </li>
     </ul>
-    <button @click="openUserCreateModal">Add New User</button>
+    <div class="add-new-user-container">
+      <button class="add-new-user" @click="openUserCreateModal">
+        <i class="pi pi-plus"></i>
+        Create New User
+      </button>
+    </div>
   </div>
   <div>
     <div>Edit Pane</div>
@@ -35,3 +41,69 @@ const closeUserCreateModal = () => {
     @closeModal="closeUserCreateModal"
   ></AddUserModal>
 </template>
+
+<style scoped>
+.user-list-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  max-height: 100vh;
+}
+
+.filter {
+  background-color: #0958d9;
+  color: white;
+  padding: 13px;
+  border-radius: 10px;
+  margin: 2px 5px;
+}
+
+.filter i {
+  margin: 0 10px 0 20px;
+}
+
+.user-list {
+  list-style-type: none;
+  overflow-y: scroll;
+}
+
+.user-list li {
+  padding: 15px 0 15px 40px;
+}
+
+.user-list li:hover {
+  cursor: pointer;
+  background-color: #e6f4ff;
+}
+
+.user-list li:active {
+  color: #0958d9;
+  background-color: #e6f4ff;
+}
+
+.add-new-user-container {
+  background-color: #dfe6ec;
+  display: flex;
+  flex: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-new-user {
+  background-color: #0958d9;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 20px;
+  border-radius: 10px;
+  font-size: 1em;
+}
+
+.add-new-user i {
+  margin-right: 7px;
+}
+
+.add-new-user:hover {
+  cursor: pointer;
+}
+</style>

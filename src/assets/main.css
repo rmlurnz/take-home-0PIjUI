@@ -1,8 +1,10 @@
-html,
-body {
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Bebas+Neue&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
 #app {
@@ -11,4 +13,34 @@ body {
   width: 100vw;
   height: 100%;
   min-height: 100vh;
+}
+
+/* global input card styles until new component created */
+.user-data-input {
+  width: 100%;
+  background-color: #e7eef5;
+  padding: 20px;
+}
+
+.user-data-input {
+  width: 100%;
+  background-color: #e7eef5;
+  padding: 20px;
+  display: flex;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+}
+
+.user-data-input label {
+  margin-right: 10px;
+  padding: 5px;
+}
+
+.user-data-input input,
+.user-data-input select {
+  flex-grow: 1;
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid lightgrey;
 }
