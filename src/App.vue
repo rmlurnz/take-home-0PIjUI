@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { useUserStore } from "./stores/UserStore";
 import AddUserModal from "./components/AddUserModal.vue";
+import EditUserPane from "./components/EditUserPane.vue";
 
 const userStore = useUserStore();
 
@@ -16,13 +17,24 @@ const openUserCreateModal = () => {
 const closeUserCreateModal = () => {
   isUserCreateModalOpen.value = false;
 };
+
+const selectedUser = ref(null);
+const handleUserSelection = (user) => {
+  selectedUser.value = user;
+};
 </script>
 
 <template>
   <div class="user-list-container">
     <div class="filter"><i class="pi pi-filter"></i> Filter Users</div>
     <ul class="user-list">
-      <li v-for="user in userStore.$state.users" :key="user.id">
+      <li
+        v-for="user in userStore.$state.users"
+        :key="user.id"
+        class="user"
+        :class="{ active: selectedUser === user }"
+        @click="handleUserSelection(user)"
+      >
         {{ user.first_name + " " + Array.from(user.last_name)[0] }}
       </li>
     </ul>
@@ -33,9 +45,7 @@ const closeUserCreateModal = () => {
       </button>
     </div>
   </div>
-  <div>
-    <div>Edit Pane</div>
-  </div>
+  <EditUserPane v-if="selectedUser" :user="selectedUser"></EditUserPane>
   <AddUserModal
     v-if="isUserCreateModalOpen"
     @closeModal="closeUserCreateModal"
@@ -67,16 +77,16 @@ const closeUserCreateModal = () => {
   overflow-y: scroll;
 }
 
-.user-list li {
+.user {
   padding: 15px 0 15px 40px;
 }
 
-.user-list li:hover {
+.user:hover {
   cursor: pointer;
   background-color: #e6f4ff;
 }
 
-.user-list li:active {
+.active {
   color: #0958d9;
   background-color: #e6f4ff;
 }
