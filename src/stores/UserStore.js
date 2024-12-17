@@ -5,7 +5,22 @@ const API_BASE_URL = "https://retoolapi.dev/0PIjUI";
 export const useUserStore = defineStore("userStore", {
   state: () => ({
     users: [],
+    planFilter: "All Plans",
   }),
+  getters: {
+    filtered: (state) => {
+      switch (state.planFilter) {
+        case "All Plans":
+          return state.users;
+        case "Free Plan":
+          return state.users.filter((user) => user.plan === "Free Plan");
+        case "Pro Plan":
+          return state.users.filter((user) => user.plan === "Pro Plan");
+        case "Trial":
+          return state.users.filter((user) => user.plan === "Trial");
+      }
+    },
+  },
   actions: {
     async fetchUsers() {
       try {
@@ -36,6 +51,9 @@ export const useUserStore = defineStore("userStore", {
       } catch (error) {
         console.log(error.message);
       }
+    },
+    updatePlanFilter(newFilter) {
+      this.planFilter = newFilter;
     },
   },
 });

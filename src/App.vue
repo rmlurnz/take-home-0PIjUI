@@ -18,18 +18,44 @@ const closeUserCreateModal = () => {
   isUserCreateModalOpen.value = false;
 };
 
+// Edit User Pane
 const selectedUser = ref(null);
 const handleUserSelection = (user) => {
   selectedUser.value = user;
+};
+
+// Filter Users
+const currentFilter = userStore.$state.planFilter;
+const filterIsOpen = ref(false);
+const toggleFilter = () => {
+  filterIsOpen.value = !filterIsOpen.value;
+};
+const updatePlanFilter = (e) => {
+  userStore.updatePlanFilter(e.target.value);
 };
 </script>
 
 <template>
   <div class="user-list-container">
-    <div class="filter"><i class="pi pi-filter"></i> Filter Users</div>
+    <div class="filter-toggle" @click="toggleFilter">
+      <i class="pi pi-filter"></i> Filter Users
+    </div>
+    <div v-if="filterIsOpen" class="filter-container">
+      <label for="filter-plan">Plan</label>
+      <select
+        v-model="currentFilter"
+        name="filter-plan"
+        @change="updatePlanFilter"
+      >
+        <option value="All Plans">All Plans</option>
+        <option value="Free Plan">Free Plan</option>
+        <option value="Pro Plan">Pro Plan</option>
+        <option value="Trial">Trial</option>
+      </select>
+    </div>
     <ul class="user-list">
       <li
-        v-for="user in userStore.$state.users"
+        v-for="user in userStore.filtered"
         :key="user.id"
         class="user"
         :class="{ active: selectedUser === user }"
@@ -60,7 +86,7 @@ const handleUserSelection = (user) => {
   max-height: 100vh;
 }
 
-.filter {
+.filter-toggle {
   background-color: #0958d9;
   color: white;
   padding: 13px;
@@ -68,8 +94,33 @@ const handleUserSelection = (user) => {
   margin: 2px 5px;
 }
 
-.filter i {
+.filter-toggle i {
   margin: 0 10px 0 20px;
+}
+
+.filter-toggle:hover {
+  cursor: pointer;
+}
+
+.filter-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  padding: 10px;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+
+.filter-container label {
+  font-size: 0.9em;
+  margin-bottom: 4px;
+}
+
+.filter-container select {
+  padding: 5px;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
 }
 
 .user-list {
