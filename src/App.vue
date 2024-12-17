@@ -126,6 +126,7 @@ const updatePlanFilter = (e) => {
 .user-list {
   list-style-type: none;
   overflow-y: scroll;
+  flex-grow: 1;
 }
 
 .user {

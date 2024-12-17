@@ -74,12 +74,6 @@ onBeforeUpdate(() => {
           <!-- @todo - need to figure out reactivity of state from copied state
           object, then hook up save button to new UserStore action to send PUT /
           PATCH request to server -->
-          <!-- <div class="modal-button-container">
-            <div @click="closeModal" class="close-modal-button">Cancel</div>
-            <button class="save-modal-button">
-              <i class="pi pi-save"></i>Save
-            </button>
-          </div> -->
         </form>
       </div>
     </div>

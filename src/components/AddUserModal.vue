@@ -33,7 +33,7 @@ const closeModal = () => {
       <h3>Creating New User</h3>
       <p>User Details</p>
       <form @submit.prevent="handleSubmit">
-        <!-- @todo - abstract input cards to new component -->
+        <!-- @todo - abstract input cards / entire form to new component -->
         <div class="user-data-input">
           <label for="first_name">First Name:</label>
           <input
